@@ -8,19 +8,19 @@ import retrofit2.http.GET
 import ru.karapetiandav.binance.models.ExchangeInfo
 
 
-interface ApiServer {
+interface ApiService {
     @GET("exchangeInfo")
     fun getExchangeInfo(): Single<ExchangeInfo>
 
     companion object {
-        fun create(): ApiServer {
+        fun create(): ApiService {
             val retrofit = Retrofit.Builder()
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .baseUrl("https://api.binance.com/api/v1/")
                     .build()
 
-            return retrofit.create(ApiServer::class.java)
+            return retrofit.create(ApiService::class.java)
         }
     }
 }
